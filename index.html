@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>均衡命途 · 站桩推演（弥诺娅队）</title>
+<style>
+:root{
+  --bg:#f2f4f9; --panel:#fff; --ink:#161a22; --ink-2:#3c4354; --muted:#6d7689;
+  --line:#e3e7f0; --line-2:#eef1f7;
+  --accent:#4f46e5; --accent-soft:#eef0fe;
+  --c-minoa:#4f46e5; --c-huohuo:#dc2626; --c-obilis:#7c3aed; --c-yueqing:#0891b2;
+  --amber:#d97706; --green:#059669; --red:#dc2626;
+  --r:14px; --shadow:0 1px 2px rgba(22,26,34,.05), 0 8px 24px -12px rgba(22,26,34,.14);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink); font-size:14px; line-height:1.6;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{display:grid;grid-template-columns:344px minmax(0,1fr);gap:20px;max-width:1520px;margin:0 auto;padding:22px 22px 48px;align-items:start}
+aside{position:sticky;top:22px;display:flex;flex-direction:column;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;padding:2px 2px 6px}
+.mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(140deg,#4f46e5,#7c3aed 55%,#0891b2);
+  color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px -6px rgba(79,70,229,.7);flex:0 0 auto;letter-spacing:.5px}
+.brand h1{font-size:15px;margin:0;letter-spacing:.2px}
+.brand p{font-size:11.5px;margin:1px 0 0;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.card>.hd{display:flex;align-items:center;justify-content:space-between;padding:13px 15px 9px}
+.card>.hd h2{font-size:12px;margin:0;font-weight:650;letter-spacing:.6px;color:var(--ink-2);text-transform:uppercase}
+.card>.bd{padding:0 15px 15px}
+.hint{font-size:11.5px;color:var(--muted);margin:7px 0 0;line-height:1.6}
+label.f{display:block;font-size:11.5px;color:var(--muted);margin:9px 0 4px}
+label.f:first-child{margin-top:0}
+input[type=text],input[type=number],select{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;
+  font-size:13px;color:var(--ink);background:#fcfdff;font-family:inherit;outline:none;
+  transition:border-color .15s, box-shadow .15s;font-variant-numeric:tabular-nums}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.12);background:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fcfdff;color:var(--ink-2);padding:6px 10px;border-radius:999px;
+  font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s}
+.chip:hover{border-color:#c9cfe0;background:#fff}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.slider-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:5px;border-radius:99px;background:#dfe4ef;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;
+  border:2.5px solid var(--accent);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.16)}
+.avval{font-variant-numeric:tabular-nums;font-weight:700;font-size:13px;min-width:74px;text-align:right;color:var(--accent)}
+
+.urow{border:1px solid var(--line-2);border-radius:10px;padding:9px 10px;margin-bottom:7px;background:#fdfdff}
+#startList input.ready{border-color:#bfc4f2;background:#f6f7ff;color:var(--accent);font-weight:700}
+.urow:focus-within{border-color:#c7cdf0}
+.urow .top{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.urow .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.urow .nm{font-size:12.5px;font-weight:650;flex:1}
+.urow .tag{font-size:10px;color:var(--muted);background:#f1f3f9;padding:1px 6px;border-radius:999px}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mini label{display:block;font-size:10px;color:var(--muted);margin-bottom:2px}
+.mini input{padding:5px 7px;font-size:12px}
+.switch{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--ink-2);cursor:pointer;user-select:none}
+.switch input{appearance:none;-webkit-appearance:none;width:34px;height:19px;border-radius:99px;background:#dbe0ec;
+  position:relative;cursor:pointer;transition:background .18s;flex:0 0 auto;margin:0;padding:0}
+.switch input::after{content:"";position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .18s}
+.switch input:checked{background:var(--accent)}
+.switch input:checked::after{transform:translateX(15px)}
+
+main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--accent))}
+.kpi .k{font-size:11px;color:var(--muted);letter-spacing:.3px}
+.kpi .v{font-size:25px;font-weight:700;line-height:1.15;margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.kpi .s{font-size:11px;color:var(--muted);margin-top:1px}
+section.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:15px 18px 17px}
+section.panel>h2{font-size:13.5px;margin:0 0 2px;font-weight:650;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+section.panel>h2::before{content:"";width:3px;height:14px;border-radius:2px;background:linear-gradient(180deg,var(--accent),#0891b2)}
+section.panel>.sub{font-size:11.5px;color:var(--muted);margin:0 0 12px;padding-left:11px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:11.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend svg{display:block;width:14px;height:14px;flex:0 0 auto}
+.legend i{display:block;width:10px;height:10px;border-radius:3px;flex:0 0 auto}
+
+.charts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini-card{border:1px solid var(--line-2);border-radius:11px;padding:10px 12px 6px;background:#fdfdff}
+.mini-card .t{font-size:11.5px;font-weight:650;color:var(--ink-2);display:flex;justify-content:space-between;align-items:baseline}
+.mini-card .t em{font-style:normal;font-size:10.5px;color:var(--muted);font-weight:400}
+
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+th{text-align:right;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.3px;padding:7px 8px;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:8px;border-bottom:1px solid var(--line-2);text-align:right;color:var(--ink-2)}
+tbody tr:hover td{background:#fafbff}
+td.name{font-weight:600;color:var(--ink)}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:600}
+.pill.ok{background:#ecfdf5;color:var(--green)}
+.pill.no{background:#fef2f2;color:var(--red)}
+.pill.mid{background:#fffbeb;color:var(--amber)}
+
+.diag{display:flex;flex-direction:column;gap:9px}
+.diag .item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;
+  background:#fafbff;border:1px solid var(--line-2);font-size:12.5px;line-height:1.62;color:var(--ink-2)}
+.diag .item .tag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:5px;margin-top:1px}
+.tag.blue{background:var(--accent-soft);color:var(--accent)}
+.tag.amber{background:#fffbeb;color:var(--amber)}
+.tag.red{background:#fef2f2;color:var(--red)}
+.tag.green{background:#ecfdf5;color:var(--green)}
+.diag b{color:var(--ink)}
+.cmp{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;table-layout:fixed}
+.cmp th:first-child,.cmp td:first-child{width:44%}
+.cmp th:not(:first-child),.cmp td:not(:first-child){width:28%;text-align:center}
+.cmp th{background:#f7f8fc;padding:6px 9px;border:1px solid var(--line-2);font-size:10.5px}
+.cmp td{padding:6px 9px;border:1px solid var(--line-2);text-align:right}
+.cmp td:first-child{text-align:left;font-weight:600}
+.cmp tr.hl td{background:#f5f4ff}
+.duel2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.dcol{border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;background:#fdfdff}
+.dcol h3{margin:0 0 4px;font-size:13px;letter-spacing:.4px}
+.dcol .dsub{margin:10px 0 6px;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.dcol .item{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border-radius:9px;background:#fff;
+  border:1px solid var(--line-2);font-size:12px;line-height:1.6;color:var(--ink-2);margin-bottom:6px}
+.dcol .item .tag{flex:0 0 auto;font-size:10.5px;font-weight:650;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.dcol .item .tag.ok{background:#e8f7ef;color:#0f7a4d}
+.dcol .item .tag.bad{background:#fdecec;color:#b42323}
+.dconcl{margin:14px 0 0;padding:11px 13px;border-radius:10px;background:#f5f4ff;border:1px solid #ddd8fb;
+  font-size:12.5px;line-height:1.7;color:var(--ink-2)}
+@media (max-width:1100px){.duel2{grid-template-columns:1fr}}
+.tb5{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;font-variant-numeric:tabular-nums}
+.tb5 th,.tb5 td{border:1px solid var(--line-2);padding:7px 9px}
+.tb5 th{background:#f7f8fc;font-size:10.5px;color:var(--muted);font-weight:600;text-align:center}
+.tb5 th:first-child,.tb5 td:first-child{text-align:left;width:26%}
+.tb5 td{text-align:center;color:var(--ink-2)}
+.tb5 td.role{font-weight:600;color:var(--ink)}
+.tb5 td.role small{font-weight:400;color:#a3aabb;margin-left:5px;font-size:10.5px}
+.tb5 .now{color:var(--accent);font-weight:700}
+.tb5 .same{color:#a3aabb}
+.tb5 .arw{color:#c3c9d6;margin:0 3px}
+details.notes{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:0 18px;box-shadow:var(--shadow)}
+details.notes summary{cursor:pointer;padding:14px 0;font-size:13px;font-weight:650;color:var(--ink-2);list-style:none;
+  display:flex;align-items:center;gap:8px}
+details.notes summary::-webkit-details-marker{display:none}
+details.notes summary::before{content:"";width:3px;height:14px;border-radius:2px;background:linear-gradient(180deg,var(--accent),#0891b2)}
+details.notes summary::after{content:"展开";margin-left:auto;font-size:11px;font-weight:500;color:var(--muted)}
+details.notes[open] summary::after{content:"收起"}
+details.notes .nb{padding-bottom:16px;font-size:12.5px;color:var(--ink-2);line-height:1.75}
+details.notes ul{margin:8px 0 0;padding-left:18px}
+details.notes li{margin:4px 0}
+details.notes code{background:#f3f5fb;padding:1px 5px;border-radius:4px;font-family:ui-monospace,Consolas,monospace;
+  font-size:11.5px;color:#4a4fbf}
+.foot{font-size:11px;color:#9aa2b4;text-align:center;margin-top:6px;line-height:1.7}
+@media (max-width:1200px){
+  .wrap{grid-template-columns:1fr;padding:16px}
+  aside{position:static}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .charts{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <aside>
+    <div class="brand">
+      <div class="mark">均衡</div>
+      <div>
+        <h1>站桩推演 · 弥诺娅队</h1>
+        <p>依据《设计文档》建模 · <b style="color:var(--accent)">v4 新文档对齐 + 欢愉队对照</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hd"><h2>战斗时长</h2></div>
+      <div class="bd">
+        <div class="chips" id="sceneChips">
+          <button class="chip" data-av="150">首轮 150</button>
+          <button class="chip on" data-av="450">四轮 450</button>
+          <button class="chip" data-av="750">七轮 750</button>
+          <button class="chip" data-av="1050">十轮 1050</button>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="avRange" min="50" max="2000" step="10" value="450">
+          <span class="avval" id="avVal">450 AV</span>
+        </div>
+        <p class="hint" id="cycleHint"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hd"><h2>战场设定</h2></div>
+      <div class="bd">
+        <div class="grid2">
+          <div><label class="f">敌方数量（站桩）</label>
+            <select id="enemyCount">
+              <option value="1" selected>1 个（单体靶）</option>
+              <option value="2">2 个</option>
+              <option value="3">3 个</option>
+              <option value="4">4 个</option>
+              <option value="5">5 个</option>
+            </select>
+          </div>
+          <div><label class="f">公平值系数</label>
+            <input type="number" id="fairK" value="26" min="1" max="60" step="1">
+          </div>
+        </div>
+        <label class="f">审判技策略</label>
+        <select id="strategy">
+          <option value="gate" selected>门槛审判：恶值达「善+1」即审判（额外回合免费触发）</option>
+          <option value="full">满仓审判：蓄到恶值 10 才审判（占用常规行动）</option>
+        </select>
+        <label class="switch"><input type="checkbox" id="shieldFollow" checked><span>结界追攻：我方攻击后回 1 战技点</span></label>
+        <label class="switch"><input type="checkbox" id="spLimit" checked><span>战技点限制：点数不足时降级为普攻</span></label>
+        <label class="switch"><input type="checkbox" id="xianDown" checked><span>欧比利斯在场：开局敌方善值上限 −1（善 5 → 4）</span></label>
+        <label class="switch"><input type="checkbox" id="miji"><span>秘技起手：敌方各 +2 恶 / 霍霍开场结界 / 欧比利斯 +2 纸片鳞</span></label>
+        <p class="hint">站桩怪不行动，因此不产生「敌方攻击我方 +1 恶」，也不产生受击回能。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hd"><h2>进战初始资源</h2></div>
+      <div class="bd">
+        <div class="grid2" id="startList"></div>
+        <div class="chips" style="margin-top:9px">
+          <button class="chip" id="startZero">全部清零</button>
+          <button class="chip" id="startNeed">够一次大招</button>
+          <button class="chip" id="startFull">全满仓</button>
+        </div>
+        <p class="hint">四个人的资源口径不同：弥诺娅=公平值、欧比利斯=纸片鳞、霍霍与月青=能量。起手值在 <b>0 AV</b> 立即参与大招判定，达门槛会当场开大并扣掉消耗（不计入行动次数）；够一次大招时输入框会高亮。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hd"><h2>欢愉队对照参数</h2></div>
+      <div class="bd">
+        <label class="switch" style="margin-top:0"><input type="checkbox" id="duelOn" checked><span>启用与银狼LV.999 欢愉队的同期对照</span></label>
+        <div class="grid2" id="elationSpd" style="margin-top:9px"></div>
+        <div class="chips" style="margin-top:8px">
+          <button class="chip" id="calibLaugh">按「首轮开大」校准笑点产出</button>
+        </div>
+        <div class="grid2" style="margin-top:8px">
+          <div><label class="f">队友每次行动产笑点</label><input type="number" id="laughPerAct" value="15" min="0" max="80" step="0.5"></div>
+          <div><label class="f">耗点盲盒期望笑点</label><input type="number" id="blindLaugh" value="1.25" min="0" max="6" step="0.25"></div>
+        </div>
+        <p class="hint">欢愉队走「队友产笑点 → 阿哈时刻 1:1 折隐藏分 → 满 60 开大 → 结界 3 次强普后清零」。隐藏分门槛 60 / 上限 300 / 结界 3 次强普取自机制拆解；<b>笑点产出速率没有官方数值</b>，默认 15 点是按「0 魂银狼首轮内开出第一次大招」反推的，可点按钮重算或直接填实测值。<br>注意首大只可能落在<b>阿哈时刻的台阶</b>上（当前每 <span id="ahaGapTxt">—</span> AV 一次），调整该参数会把首大推前/推后<b>整级台阶</b>，不是平滑移动。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hd"><h2>队伍与行动模式</h2></div>
+      <div class="bd" id="unitList"></div>
+      <p class="hint">模式 A=普攻 / S=战技。默认策略为「弥诺娅全战技积恶、欧比利斯全战技拉条、霍霍与月青轮流普攻产点」。</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="kpis" id="kpis"></div>
+
+    <section class="panel">
+      <h2>行动时间轴</h2>
+      <p class="sub">横轴为行动值 AV，虚线为轮次边界；浅红底色为霍霍【碰次瓦】结界的覆盖区间</p>
+      <div id="timeline"></div>
+      <div class="legend" id="tlLegend"></div>
+    </section>
+
+    <section class="panel">
+      <h2>恶值循环</h2>
+      <p class="sub">恶值每单位上限 10；善值基准 5（欧比利斯在场压到 4），横过「善+1」即解锁审判技，到 10 是满仓，审判技后清零</p>
+      <div id="evilChart"></div>
+    </section>
+
+    <section class="panel">
+      <h2>资源与能量循环</h2>
+      <p class="sub">弥诺娅用【公平值】、欧比利斯用【纸片鳞】，霍霍与月青用常规能量；三者上限与门槛各不相同，故分开读数</p>
+      <div class="charts">
+        <div class="mini-card"><div class="t">公平值<em>上限 170 / 门槛 130</em></div><div id="cFair"></div></div>
+        <div class="mini-card"><div class="t">纸片鳞<em>上限 10</em></div><div id="cScales"></div></div>
+        <div class="mini-card"><div class="t">常规能量<em>霍霍 170 / 月青 190</em></div><div id="cEnergy"></div></div>
+      </div>
+      <div class="legend" id="resLegend"></div>
+    </section>
+
+    <section class="panel">
+      <h2>循环明细</h2>
+      <p class="sub">「起手」为该角色进战时的初始资源（弥诺娅=公平值、欧比利斯=纸片鳞、其余=能量）；「大招间隔」为本次推演中相邻两次大招的平均 AV 差，用于判断该角色的循环能否在战斗时长内闭合</p>
+      <div style="overflow-x:auto">
+        <table id="detail">
+          <thead><tr>
+            <th>角色</th><th>速度</th><th>起手</th><th>行动</th><th>普攻</th><th>战技</th><th>额外回合</th>
+            <th>终结技</th><th>审判技</th><th>资源产出</th><th>大招间隔</th><th>状态</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>策略对比</h2>
+      <p class="sub">同一套面板与行动模式下，两种审判技策略的产出差异</p>
+      <div id="cmpBox"></div>
+    </section>
+
+    <section class="panel">
+      <h2>起手资源对照</h2>
+      <p class="sub">同一面板下，当前起手与「全员 0 起手」的逐项差异；用于判断初始能量到底换来了什么</p>
+      <div id="startCmpBox"></div>
+    </section>
+
+    <section class="panel">
+      <h2>双队同期对照</h2>
+      <p class="sub">同一行动时长与敌方数量下，【均衡】队与银狼LV.999 欢愉队的循环对比；两侧均按「0 起手」口径，优缺点由实测差值 + 规则结构生成</p>
+      <div id="duelBox"></div>
+    </section>
+
+    <section class="panel">
+      <h2>自动诊断</h2>
+      <p class="sub">只描述结构性问题与文档中的规则缺口，不含强度评价</p>
+      <div class="diag" id="diag"></div>
+    </section>
+
+    <details class="notes">
+      <summary>模型口径与文档未定义项</summary>
+      <div class="nb">
+        <p style="margin:0 0 6px"><b>已按文档实现</b></p>
+        <ul style="margin-top:0">
+          <li>行动值 <code>AV = 10000 / 速度</code>，首轮 150 AV、其后每轮 100 AV</li>
+          <li>弥诺娅：战技对至多 3 个目标各 +3 恶（结界中额外 +1）；审判技回收恶值最高的 3 位并清空敌方全体恶值，按 <code>(恶 − 善) × 系数</code> 转化公平值；恶−善 ≥ 1 解锁审判技并触发一次额外回合，审判技后重置</li>
+          <li>欧比利斯：天赋「获取后开局降低敌方全体善值上限 1 点」→ 善值按 <b>4</b> 计算（可关闭）；终结技门槛 <b>10 点纸片鳞</b></li>
+          <li>月青：终结技【性本恶】期间，下一次我方审判技回收恶值时<b>反还 2 单位恶值</b>（已计入恶值循环）</li>
+          <li>霍霍·冥焰：结界 3 回合（自身回合开始 −1）、结界期间我方形动后追攻并回 1 战技点；普攻后自身下次行动提前 15%；恶值首次触顶时全队速度 +10%</li>
+          <li>欧比利斯：战技使目标行动提前 16% 并附【折学家】，持有时每回合开始给欧比利斯 +1 纸片鳞；纸片鳞另来源为受治疗 +1、队友审判技 +2、队友加恶 +1（各自每轮重置）</li>
+          <li>月青：能量上限 190；速度超 140 部分每点转化 0.12% 能量恢复效率（上限 100 点）；终结技【性本恶】期间下一次审判技反还 2 单位恶值</li>
+          <li>终结技不消耗行动值，资源满足即结算；施放后自身回 5 点能量</li>
+        </ul>
+        <p style="margin:12px 0 6px"><b>文档未定义 · 本工具的取值</b></p>
+        <ul style="margin-top:0">
+          <li><b>纸片鳞门槛</b>：按设计文档当前的 <b>10 点</b>；本工具把上限与门槛取同一个值（攒满即开），因此不会出现「攒溢出」的情况</li>
+          <li><b>进战初始资源</b>：工具新增的可调项，用于模拟秘技起手、上一波战斗残留资源带入下一波、或开局满能量等场景。起手值在 0 AV 立即参与大招判定，达门槛会当场开大并扣除消耗（不计入行动次数）；弥诺娅的起手值按「公平值」口径、欧比利斯按「纸片鳞」口径</li>
+          <li><b>公平值系数</b>：文档只写「×系数」。默认取 26，使恶值满仓恰好等于一次大招的 130 点，便于对齐设计意图；可在左侧改</li>
+          <li><b>公平值结算口径</b>：按「审判技回收时转化并累加」实现（对应定位里「回收恶值并转化为资源」）。若你的本意是「实时派生值」，则大招会在恶值达标瞬间就绪，节奏完全不同</li>
+          <li><b>角色速度</b>：文档未给面板，示例取 155 / 158 / 166 / 145，仅用于演示各阈值（150 / 110 / 160 / 140）是否被跨越</li>
+          <li><b>善值扣减单位</b>：按「每个被回收目标各扣 1 份善值」计算，善值取 4（欧比利斯降善）或 5（关闭该天赋）</li>
+          <li><b>秘技起手</b>：可选开关。开启时敌方各 +2 恶、霍霍开局自动战技（结界 3 回合）、欧比利斯 +2 纸片鳞；月青秘技的判罚力度加成不计（属伤害侧）</li>
+          <li><b>额外回合</b>：视为不消耗行动值、不改变下次行动位置的立即行动</li>
+        </ul>
+        <p style="margin:12px 0 6px"><b>欢愉队对照的口径</b></p>
+        <ul style="margin-top:0">
+          <li>欢愉队用<b>同构资源模型</b>推演：队友行动产笑点 → 阿哈时刻按 1:1 折入隐藏分并清零笑点 → 隐藏分满 60 开大 → 结界内 3 次强化普攻后隐藏分清零。与均衡队共用同一套 AV 规则（<code>10000 / 速度</code>）</li>
+          <li><b>门槛与上限</b>：隐藏分门槛 60、上限 300、结界 3 次强普 —— 取自 0 星魂口径的机制拆解</li>
+          <li><b>阿哈时刻速度</b>：<code>80 + 0.2 × 最快 + 0.1 × 第二快</code>，社区口径，非官方公示</li>
+          <li><b>笑点产出</b>：无从官方获得，默认 <b>15 点/行动</b>，是用「0 魂银狼首轮内开出第一次大招（≤150 AV）」反推出来的，属推演假设；左侧按钮可重新反推，也可直接填实测值。这个数会显著改变欢愉队侧的所有结论，改的时候看两侧是否仍成立</li>
+          <li><b>盲盒期望笑点</b>：默认 1.25，由「1.25 次触发 × 三选一中的 +3 笑点」折算</li>
+          <li>对照两侧统一取「0 起手」，保证同口径；欢愉队不模拟战技点耗尽后的降级，也不含愿力、升格、欢愉负债等数值层机制</li>
+        </ul>
+        <p style="margin:12px 0 6px"><b>未纳入</b></p>
+        <ul style="margin-top:0">
+          <li>伤害、削韧、击破、判罚力度与双暴 —— 本工具只推演行动与资源时序</li>
+          <li>怪物招式、控制、我方减员</li>
+          <li>星魂、光锥、遗器（秘技已按可选开关纳入）</li>
+        </ul>
+      </div>
+    </details>
+
+    <p class="foot">本工具为战斗时序推演草案，数值与结论以设计文档最终评审为准；欢愉队为同构资源模型，参数可调。</p>
+  </main>
+</div>
+
+<script>
+/*__ENGINE_START__*/
+const AV_BASE = 10000;
+const FIRST_CYCLE_AV = 150, CYCLE_AV = 100;
+const XIAN = 5;          // 善值基准值（欧比利斯天赋可将敌方的善值上限压到 4）
+const EVIL_CAP = 10;     // 恶值上限
+const FAIR_COST = 130;   // 公平值门槛
+const FAIR_CAP = 170;    // 公平值储存上限
+const SCALE_COST = 10;   // 纸片鳞大招消耗（10 点开启）
+const HH_COST = 170;     // 霍霍能量上限
+const YQ_COST = 190;     // 月青能量上限
+const SP_CAP = 5;
+
+const CHARS = {
+  minoa:   { name:'弥诺娅',    color:'#4f46e5', role:'主C / 裁决者' },
+  huohuo:  { name:'霍霍·冥焰', color:'#dc2626', role:'辅助 / 副C / 主簿者' },
+  obilis:  { name:'欧比利斯',  color:'#7c3aed', role:'辅助 / 命途拐' },
+  yueqing: { name:'月青',      color:'#0891b2', role:'生存 / 主簿者' }
+};
+const ORDER = ['minoa', 'huohuo', 'obilis', 'yueqing'];
+
+function cyclesCovered(av){
+  if (av <= FIRST_CYCLE_AV) return 1;
+  return 1 + Math.ceil((av - FIRST_CYCLE_AV) / CYCLE_AV);
+}
+function totalAVFor(c){ return c <= 1 ? FIRST_CYCLE_AV : FIRST_CYCLE_AV + (c - 1) * CYCLE_AV; }
+function cycleBands(av){
+  const out = []; let s = 0, i = 1;
+  while (s < av - 1e-9){
+    const e = i === 1 ? FIRST_CYCLE_AV : s + CYCLE_AV;
+    out.push({ idx: i, start: s, end: Math.min(e, av) });
+    s = e; i++;
+    if (i > 200) break;
+  }
+  return out;
+}
+
+function simulate(cfg){
+  const T = cfg.av;
+  const EN = Math.max(1, Math.min(5, cfg.enemyCount | 0));
+  const K = cfg.strategy === 'full' ? 'full' : 'gate';
+  const fairK = Math.max(1, cfg.fairK || 26);
+  // 欧比利斯天赋：开局降低敌方全体「善」值上限 1 点（5 → 4）
+  const xian = Math.max(0, cfg.xianDown === false ? XIAN : XIAN - 1);
+  const miji = !!cfg.miji;          // 秘技起手
+  let rebate = 0, rebateUsed = 0;   // 月青【性本恶】：下一次审判技反还 2 单位恶值
+
+  // 进战初始资源：按各自资源口径给起手值，并夹到上限
+  const ST = cfg.start || {};
+  function startOf(k, cap){
+    const v = Number(ST[k]);
+    if (!isFinite(v) || v <= 0) return 0;
+    return Math.min(cap, v);
+  }
+  const START = {
+    minoa:   startOf('minoa', FAIR_CAP),
+    huohuo:  startOf('huohuo', HH_COST),
+    obilis:  startOf('obilis', SCALE_COST),
+    yueqing: startOf('yueqing', YQ_COST)
+  };
+
+  const units = ORDER.map(function(k){
+    const spd = Math.max(1, cfg.spd[k] || 100);
+    const cost = k === 'huohuo' ? HH_COST : (k === 'yueqing' ? YQ_COST : 0);
+    return {
+      key: k, name: CHARS[k].name, color: CHARS[k].color, role: CHARS[k].role,
+      baseSpd: spd, spd: spd, next: AV_BASE / spd,
+      acts: 0, basics: 0, skills: 0, ults: 0, extraTurns: 0, verdicts: 0, forced: 0,
+      energy: START[k] || 0, cost: cost, start: START[k] || 0,
+      ultTimes: [], events: [], patternIdx: 0, pendingAdv: 0
+    };
+  });
+  const U = {}; units.forEach(function(u){ U[u.key] = u; });
+
+  let sp = 3, spWaste = 0, spShort = 0;
+  let evil = []; for (let i = 0; i < EN; i++) evil.push(miji ? 2 : 0);   // 弥诺娅秘技：每波次开始各 +2 恶
+  let fair = START.minoa, fairGain = 0, fairWaste = 0;
+  let scales = Math.min(SCALE_COST, START.obilis + (miji ? 2 : 0)), scaleWaste = 0;   // 欧比利斯秘技：+2 纸片鳞
+  const scaleBy = { scholar: 0, heal: 0, verdict: 0, evil: 0 };
+  let shield = miji ? 3 : 0, shieldTime = 0;   // 霍霍秘技：开局自动触发一次战技（结界 3 回合）
+  let unlockUsed = false, evilCapped = false, scholarOn = false;
+  let trig = { heal: false, verdict: false, evil: false };
+  const samples = [];
+  let evilEvents = [];   // {t, from, to}
+  let lastT = 0;
+
+  function maxEvil(){ let m = 0; for (let i = 0; i < evil.length; i++) if (evil[i] > m) m = evil[i]; return m; }
+  function sumEvil(){ let s = 0; for (let i = 0; i < evil.length; i++) s += evil[i]; return s; }
+
+  function pushSample(t){
+    samples.push({ t: t, evil: maxEvil(), fair: fair, scales: scales, hh: U.huohuo.energy, yq: U.yueqing.energy, shield: shield });
+  }
+
+  function erOf(u){
+    if (u.key === 'yueqing'){
+      const over = Math.max(0, Math.min(100, u.spd - 140));
+      return 1 + 0.0012 * over;
+    }
+    return 1;
+  }
+  function gainEnergy(u, base){
+    if (!u.cost) return;
+    const raw = u.energy + base * erOf(u);
+    u.energy = Math.min(u.cost, raw);
+  }
+  function addScales(n, src){
+    if (n <= 0) return;
+    scaleBy[src] += n;
+    const raw = scales + n;
+    scales = Math.min(SCALE_COST, raw);
+    scaleWaste += raw - scales;
+  }
+  function gainSP(n){
+    const raw = sp + n;
+    sp = Math.min(SP_CAP, raw);
+    spWaste += raw - sp;
+  }
+  function addEvil(idx, amt){
+    const before = evil[idx];
+    evil[idx] = Math.min(EVIL_CAP, before + amt);
+    if (evil[idx] >= EVIL_CAP && !evilCapped){
+      evilCapped = true;
+      units.forEach(function(u){
+        const remain = u.next - lastT;
+        u.spd *= 1.1;
+        u.next = lastT + remain / 1.1;
+      });
+    }
+    if (!trig.evil){ trig.evil = true; addScales(1, 'evil'); }
+    return evil[idx];
+  }
+  function advance(u, pct, t){
+    if (u.next <= t) return;
+    u.next = Math.max(t, u.next - (AV_BASE / u.spd) * pct);
+  }
+
+  function checkUlts(t){
+    let guard = 0, changed = true;
+    while (changed && guard++ < 30){
+      changed = false;
+      ['huohuo', 'yueqing'].forEach(function(k){
+        const u = U[k];
+        if (u.energy + 1e-9 >= u.cost){
+          u.energy -= u.cost; u.ults++; u.ultTimes.push(t);
+          u.events.push({ t: t, kind: 'ult' });
+          u.energy = Math.min(u.cost, u.energy + 5);
+          if (k === 'yueqing') rebate = 1;   // 月青【性本恶】：下一次审判技反还 2 恶
+          changed = true;
+        }
+      });
+      if (scales >= SCALE_COST){
+        scales -= SCALE_COST; U.obilis.ults++; U.obilis.ultTimes.push(t);
+        U.obilis.events.push({ t: t, kind: 'ult' });
+        trig = { heal: false, verdict: false, evil: false };
+        pushSample(t);
+        changed = true;
+      }
+      if (fair >= FAIR_COST){
+        fair -= FAIR_COST; U.minoa.ults++; U.minoa.ultTimes.push(t);
+        U.minoa.events.push({ t: t, kind: 'ult' });
+        pushSample(t);
+        changed = true;
+      }
+    }
+  }
+
+  function castVerdict(t){
+    pushSample(t);   // 先记录清空前的峰值，否则曲线看不到恶值冲顶
+    const sorted = evil.slice().sort(function(a, b){ return b - a; });
+    const top = sorted.slice(0, 3).filter(function(v){ return v > 0; });
+    const recovered = top.reduce(function(a, b){ return a + b; }, 0);
+    const raw = Math.max(0, recovered - xian * top.length) * fairK;
+    const before = fair;
+    fair = Math.min(FAIR_CAP, fair + raw);
+    fairGain += fair - before;
+    fairWaste += (before + raw) - fair;
+    const gained = fair - before;
+    evilEvents.push({ t: t, from: recovered, to: 0, units: top.length, gain: gained, raw: raw, capped: fair === FAIR_CAP });
+    evil = evil.map(function(){ return 0; });
+    if (rebate > 0){ rebate--; rebateUsed++; evil[0] = Math.min(EVIL_CAP, evil[0] + 2); }
+    unlockUsed = false;
+    if (!trig.verdict){ trig.verdict = true; addScales(2, 'verdict'); }
+    return { recovered: recovered, gain: gained };
+  }
+
+  function pick(u, t){
+    const pat = (cfg.pattern[u.key] || 'A').toUpperCase().replace(/[^AS]/g, '') || 'A';
+    let c = pat[u.patternIdx % pat.length];
+    u.patternIdx++;
+    if (c === 'S' && cfg.spLimit && sp < 1){ c = 'A'; u.forced++; spShort++; }
+    u.events.push({ t: t, kind: c });
+    return c;
+  }
+
+  // 起手结算：初始资源在 0 AV 立即参与大招判定（起手满能量 = 开局先手大招）
+  pushSample(0);
+  checkUlts(0);
+
+  let guard = 0;
+  while (guard++ < 30000){
+    // 选下一个行动者
+    let u = null;
+    for (let i = 0; i < units.length; i++){
+      if (units[i].next <= T + 1e-9 && (!u || units[i].next < u.next)) u = units[i];
+    }
+    if (!u) break;
+    const t = u.next;
+    if (shield > 0) shieldTime += t - lastT;
+    lastT = t;
+    u.acts++;
+    u.events.push({ t: t, kind: 'turn' });
+
+    if (u.key === 'huohuo' && shield > 0) shield--;
+
+    if (u.key === 'minoa'){
+      if (scholarOn) addScales(1, 'scholar');
+      const mE = maxEvil();
+      if (K === 'full' && mE >= EVIL_CAP){
+        u.verdicts++;
+        u.events.push({ t: t, kind: 'verdict' });
+        castVerdict(t);
+      } else {
+        const kind = pick(u, t);
+        if (kind === 'S'){
+          u.skills++; sp = Math.max(0, sp - 1);
+          const hits = Math.min(3, EN);
+          const add = 3 + (shield > 0 ? 1 : 0);
+          for (let i = 0; i < hits; i++) addEvil(i, add);
+          if (!unlockUsed && maxEvil() - xian >= 1){
+            unlockUsed = true;
+            u.extraTurns++;
+            u.events.push({ t: t, kind: 'extra' });
+            if (K === 'gate'){
+              u.verdicts++;
+              u.events.push({ t: t, kind: 'verdict' });
+              castVerdict(t);
+            } else {
+              gainSP(1);
+              u.events.push({ t: t, kind: 'A' });
+            }
+          }
+        } else {
+          u.basics++; gainSP(1);
+        }
+      }
+      pushSample(t);
+    } else if (u.key === 'huohuo'){
+      const kind = pick(u, t);
+      if (kind === 'S'){
+        u.skills++; sp = Math.max(0, sp - 1);
+        shield = 3;
+        gainEnergy(u, 30);
+      } else {
+        u.basics++; gainSP(1);
+        gainEnergy(u, 20);
+        u.pendingAdv = 0.15;
+      }
+      pushSample(t);
+    } else if (u.key === 'obilis'){
+      const kind = pick(u, t);
+      if (kind === 'S'){
+        u.skills++; sp = Math.max(0, sp - 1);
+        scholarOn = true;
+        advance(U.minoa, 0.16, t);
+      } else {
+        u.basics++; gainSP(1);
+      }
+      pushSample(t);
+    } else {
+      const kind = pick(u, t);
+      if (kind === 'S'){
+        u.skills++; sp = Math.max(0, sp - 1);
+        gainEnergy(u, 30);
+        if (!trig.heal){ trig.heal = true; addScales(1, 'heal'); }
+      } else {
+        u.basics++; gainSP(1);
+        gainEnergy(u, 20);
+      }
+      pushSample(t);
+    }
+
+    // 结界追攻：我方造成攻击后回 1 战技点
+    if (shield > 0 && cfg.shieldFollow) gainSP(1);
+
+    checkUlts(t);
+
+    // 推进行动
+    const step = AV_BASE / u.spd;
+    u.next = t + step * (1 - u.pendingAdv);
+    u.pendingAdv = 0;
+  }
+
+  if (shield > 0) shieldTime += Math.max(0, T - lastT);
+  pushSample(T);
+
+  // 汇总
+  const totals = { acts: 0, ults: 0, verdicts: 0, extra: 0, spWaste: spWaste, spShort: spShort };
+  units.forEach(function(u){
+    totals.acts += u.acts;
+    totals.ults += u.ults;
+    totals.verdicts += u.verdicts;
+    totals.extra += u.extraTurns;
+  });
+
+  return {
+    T: T, cycles: cyclesCovered(T), enemyCount: EN, strategy: K,
+    xian: xian, rebateUsed: rebateUsed, miji: miji,
+    units: units, byKey: U, start: START,
+    resource: {
+      fair: fair, fairGain: fairGain, fairWaste: fairWaste,
+      scales: scales, scaleWaste: scaleWaste, scaleBy: scaleBy,
+      sp: sp, spWaste: spWaste, spShort: spShort,
+      shieldTime: shieldTime, shieldRate: T > 0 ? shieldTime / T : 0,
+      evilRecovered: evilEvents.reduce(function(a, e){ return a + e.from; }, 0)
+    },
+    samples: samples, evilEvents: evilEvents, totals: totals
+  };
+}
+
+/* ===== 欢愉队同期对照：资源同构模型（笑点 → 隐藏分 → 结界） ===== */
+const WOLF_ULT_COST = 60;     // 隐藏分门槛（社区口径）
+const WOLF_HID_CAP = 300;     // 0 魂隐藏分上限
+const WOLF_SHIELD_HITS = 3;   // 结界内强化普攻次数（0 魂固定 3 次）
+const AHA_BASE = 80, AHA_W1 = 0.2, AHA_W2 = 0.1;   // 阿哈时刻速度公式
+
+const ECHARS = {
+  wolf:     { name: '银狼LV.999', color: '#0284c7', role: '主C / 欢愉' },
+  yaoguang: { name: '爻光',       color: '#c026d3', role: '辅助 / 产笑点' },
+  zhenzhu:  { name: '真珠',       color: '#059669', role: '辅助 / 产笑点' }
+};
+const EORDER = ['wolf', 'yaoguang', 'zhenzhu'];
+
+function ahaSpeed(spds){
+  const s = spds.slice().sort(function(a, b){ return b - a; });
+  return AHA_BASE + AHA_W1 * (s[0] || 0) + AHA_W2 * (s[1] || 0);
+}
+
+function simulateElation(cfg){
+  const T = Math.max(1, cfg.av);
+  const lp = Math.max(0, Number(cfg.laughPerAct) || 0);     // 队友每次行动产笑点
+  const box = Math.max(0, Number(cfg.blindLaugh) || 0);     // 每次耗点的盲盒期望笑点
+  const ST = cfg.start || {};
+
+  const units = EORDER.map(function(k){
+    const spd = Math.max(1, (cfg.spd && cfg.spd[k]) || 100);
+    return {
+      key: k, name: ECHARS[k].name, color: ECHARS[k].color, role: ECHARS[k].role,
+      spd: spd, next: AV_BASE / spd, acts: 0, ults: 0, basics: 0, skills: 0,
+      ultTimes: [], events: [], patternIdx: 0
+    };
+  });
+  const U = {}; units.forEach(function(u){ U[u.key] = u; });
+
+  const ahaS = ahaSpeed(units.map(function(u){ return u.spd; }));
+  const ahaGap = AV_BASE / Math.max(1, ahaS);
+
+  let laugh = Math.max(0, Number(ST.laugh) || 0);
+  let hid = Math.max(0, Math.min(WOLF_HID_CAP, Number(ST.hid) || 0));
+  let shieldHits = 0;
+  let ahaCount = 0, ahaNext = ahaGap;
+  let hidGain = 0, laughGain = 0, laughLost = 0, hidLost = 0;
+  let sp = 3, spWaste = 0, boxHits = 0, empHits = 0;
+  const samples = [];
+  let guard = 0;
+
+  function pushSample(t){
+    samples.push({ t: t, laugh: laugh, hid: hid, shield: shieldHits });
+  }
+
+  // 隐藏分达门槛且不在结界中 → 开大并进入结界
+  function wolfCheck(t){
+    if (shieldHits > 0) return;
+    if (hid + 1e-9 < WOLF_ULT_COST) return;
+    hid -= WOLF_ULT_COST;
+    U.wolf.ults++; U.wolf.ultTimes.push(t);
+    U.wolf.events.push({ t: t, kind: 'ult' });
+    shieldHits = WOLF_SHIELD_HITS;
+  }
+
+  pushSample(0);
+  wolfCheck(0);
+
+  while (guard++ < 30000){
+    // 同刻事件：阿哈时刻优先结算，再走角色行动
+    let t = Infinity, unit = null;
+    for (let i = 0; i < units.length; i++){
+      if (units[i].next < t){ t = units[i].next; unit = units[i]; }
+    }
+    const ahaTurn = ahaNext < t - 1e-9;
+    if (ahaTurn){ t = ahaNext; unit = null; }
+    if (t > T + 1e-9) break;
+
+    if (ahaTurn){
+      // 阿哈时刻：笑点按 1:1 折入隐藏分后清零
+      const room = Math.max(0, WOLF_HID_CAP - hid);
+      const add = Math.min(laugh, room);
+      hid += add; hidGain += add;
+      laughLost += laugh - add;
+      laugh = 0;
+      ahaCount++;
+      ahaNext += ahaGap;
+      wolfCheck(t);
+      pushSample(t);
+      continue;
+    }
+
+    unit.acts++;
+    unit.events.push({ t: t, kind: 'turn' });
+
+    if (unit.key === 'wolf'){
+      if (shieldHits > 0){
+        shieldHits--; empHits++;
+        unit.events.push({ t: t, kind: 'emp' });
+        if (shieldHits === 0){ hidLost += hid; hid = 0; }   // 退出结界：隐藏分清零
+      } else {
+        unit.basics++;
+      }
+    } else {
+      laugh += lp; laughGain += lp;
+      const c = (unit.patternIdx++ % 2 === 0) ? 'A' : 'S';   // 默认 A/S 交替
+      if (c === 'S' && sp >= 1){
+        unit.skills++; sp--;
+        laugh += box; laughGain += box;
+        if (box > 0) boxHits++;
+      } else {
+        unit.basics++;
+        if (sp < SP_CAP) sp++; else spWaste++;
+      }
+    }
+
+    wolfCheck(t);
+    pushSample(t);
+    unit.next = t + AV_BASE / unit.spd;
+  }
+
+  pushSample(T);
+
+  const totals = { acts: 0, ults: 0 };
+  units.forEach(function(u){ totals.acts += u.acts; totals.ults += u.ults; });
+
+  return {
+    T: T, cycles: cyclesCovered(T), enemyCount: Math.max(1, Math.min(5, cfg.enemyCount | 0)),
+    units: units, byKey: U,
+    ahaSpeed: ahaS, ahaGap: ahaGap, ahaCount: ahaCount,
+    resource: {
+      hid: hid, laugh: laugh, hidGain: hidGain, laughGain: laughGain,
+      laughLost: laughLost, hidLost: hidLost, sp: sp, spWaste: spWaste,
+      boxHits: boxHits, empHits: empHits
+    },
+    samples: samples, totals: totals
+  };
+}
+
+/*__ENGINE_END__*/
+
+/* ======================= 状态 ======================= */
+const state = {
+  av: 450,
+  enemyCount: 1,
+  fairK: 26,
+  strategy: 'gate',
+  shieldFollow: true,
+  spLimit: true,
+  spd: { minoa: 155, huohuo: 158, obilis: 166, yueqing: 145 },
+  pattern: { minoa: 'S', huohuo: 'AS', obilis: 'S', yueqing: 'AAS' },
+  start: { minoa: 0, huohuo: 0, obilis: 0, yueqing: 0 },
+  xianDown: true,
+  miji: false,
+  elation: {
+    on: true,
+    spd: { wolf: 160, yaoguang: 165, zhenzhu: 155 },
+    laughPerAct: 15,
+    blindLaugh: 1.25
+  }
+};
+
+/* 起手资源的取值域：cap = 上限，need = 刚好够一次大招 */
+const START_META = {
+  minoa:   { res: '公平值', cap: FAIR_CAP,   need: FAIR_COST,  step: 10 },
+  huohuo:  { res: '能量',   cap: HH_COST,    need: HH_COST,    step: 10 },
+  obilis:  { res: '纸片鳞', cap: SCALE_COST, need: SCALE_COST, step: 1 },
+  yueqing: { res: '能量',   cap: YQ_COST,    need: YQ_COST,    step: 10 }
+};
+
+const $ = function(s){ return document.querySelector(s); };
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmt(n, d){ if (!isFinite(n)) return '—'; const p = Math.pow(10, d || 0); return (Math.round(n * p) / p).toFixed(d || 0); }
+
+/* ======================= 侧栏 ======================= */
+function renderStart(){
+  $('#startList').innerHTML = ORDER.map(function(k){
+    const m = START_META[k], v = state.start[k] || 0;
+    return '<div>' +
+      '<label class="f" style="margin-top:0;display:flex;justify-content:space-between;align-items:baseline;gap:6px;white-space:nowrap">' +
+        '<span><span style="color:var(--ink-2);font-weight:600">' + CHARS[k].name + '</span>' +
+        ' <span style="color:#a3aabb;font-size:10.5px">' + m.res + '</span></span>' +
+        '<span style="color:#c3c9d6;font-size:10px">≤' + m.cap + '</span></label>' +
+      '<input type="number" data-sk="' + k + '" value="' + v + '" min="0" max="' + m.cap + '" step="' + m.step + '"' +
+        (v >= m.need ? ' class="ready"' : '') + '>' +
+      '</div>';
+  }).join('');
+}
+function setStart(pick){
+  ORDER.forEach(function(k){ state.start[k] = Math.max(0, Math.min(START_META[k].cap, pick(START_META[k]))); });
+  renderStart(); schedule();
+}
+$('#startList').addEventListener('input', function(e){
+  const k = e.target.dataset.sk;
+  if (!k) return;
+  let v = Number(e.target.value);
+  if (!isFinite(v)) v = 0;
+  state.start[k] = Math.max(0, Math.min(START_META[k].cap, v));
+  e.target.classList.toggle('ready', state.start[k] >= START_META[k].need);   // 够一次大招即高亮
+  schedule();
+});
+$('#startList').addEventListener('change', function(e){
+  const k = e.target.dataset.sk;
+  if (k) e.target.value = state.start[k];   // 失焦后回写夹取结果
+});
+$('#startZero').addEventListener('click', function(){ setStart(function(){ return 0; }); });
+$('#startNeed').addEventListener('click', function(){ setStart(function(m){ return m.need; }); });
+$('#startFull').addEventListener('click', function(){ setStart(function(m){ return m.cap; }); });
+
+function renderUnits(){
+  const box = $('#unitList');
+  box.innerHTML = ORDER.map(function(k){
+    const c = CHARS[k];
+    return '<div class="urow">' +
+      '<div class="top"><span class="dot" style="background:' + c.color + '"></span>' +
+      '<span class="nm">' + c.name + '</span><span class="tag">' + c.role + '</span></div>' +
+      '<div class="mini">' +
+        '<div><label>速度</label><input type="number" data-k="' + k + '" data-f="spd" value="' + state.spd[k] + '" min="1" max="400"></div>' +
+        '<div><label>行动模式</label><input type="text" data-k="' + k + '" data-f="pattern" value="' + state.pattern[k] + '"></div>' +
+      '</div></div>';
+  }).join('');
+}
+$('#unitList').addEventListener('input', function(e){
+  const t = e.target, k = t.dataset.k, f = t.dataset.f;
+  if (!k || !f) return;
+  if (f === 'spd') state.spd[k] = Number(t.value) || 1;
+  else { t.value = t.value.toUpperCase().replace(/[^AS]/gi, ''); state.pattern[k] = t.value || 'A'; }
+  schedule();
+});
+
+function syncAV(v){
+  state.av = Math.max(50, Math.min(2000, Math.round(v)));
+  const r = $('#avRange');
+  r.value = state.av;
+  const pct = (state.av - 50) / (2000 - 50) * 100;
+  r.style.background = 'linear-gradient(90deg,var(--accent) ' + pct + '%,#dfe4ef ' + pct + '%)';
+  $('#avVal').textContent = state.av + ' AV';
+  const c = cyclesCovered(state.av), ex = totalAVFor(c);
+  $('#cycleHint').textContent = '覆盖 ' + c + ' 个轮次（首轮 150 AV，其后每轮 100 AV）' +
+    (Math.abs(ex - state.av) > 0.5 ? '；完整 ' + c + ' 轮需 ' + ex + ' AV' : '');
+  document.querySelectorAll('#sceneChips .chip').forEach(function(el){
+    el.classList.toggle('on', Number(el.dataset.av) === state.av);
+  });
+}
+$('#avRange').addEventListener('input', function(e){ syncAV(Number(e.target.value)); schedule(); });
+document.querySelectorAll('#sceneChips .chip').forEach(function(el){
+  el.addEventListener('click', function(){ syncAV(Number(el.dataset.av)); schedule(); });
+});
+$('#enemyCount').addEventListener('change', function(e){ state.enemyCount = Number(e.target.value) || 1; schedule(); });
+$('#fairK').addEventListener('input', function(e){ state.fairK = Number(e.target.value) || 26; schedule(); });
+$('#strategy').addEventListener('change', function(e){ state.strategy = e.target.value; schedule(); });
+$('#shieldFollow').addEventListener('change', function(e){ state.shieldFollow = e.target.checked; schedule(); });
+$('#spLimit').addEventListener('change', function(e){ state.spLimit = e.target.checked; schedule(); });
+$('#xianDown').addEventListener('change', function(e){ state.xianDown = e.target.checked; schedule(); });
+$('#miji').addEventListener('change', function(e){ state.miji = e.target.checked; schedule(); });
+
+/* 欢愉队对照参数 */
+$('#duelOn').addEventListener('change', function(e){ state.elation.on = e.target.checked; schedule(); });
+$('#elationSpd').addEventListener('input', function(e){
+  const k = e.target.dataset.ek;
+  if (!k) return;
+  state.elation.spd[k] = Math.max(1, Number(e.target.value) || 1);
+  schedule();
+});
+$('#laughPerAct').addEventListener('input', function(e){
+  state.elation.laughPerAct = Math.max(0, Number(e.target.value) || 0); schedule();
+});
+$('#blindLaugh').addEventListener('input', function(e){
+  state.elation.blindLaugh = Math.max(0, Number(e.target.value) || 0); schedule();
+});
+
+// 反推笑点产出：让银狼首大落在 150 AV（首轮）附近
+$('#calibLaugh').addEventListener('click', function(){
+  let lo = 0, hi = 200, hit = false;
+  for (let i = 0; i < 42; i++){
+    const mid = (lo + hi) / 2;
+    const e = simulateElation(elationCfg({ laughPerAct: mid, av: 400 }));
+    const f = e.byKey.wolf.ultTimes.length ? e.byKey.wolf.ultTimes[0] : Infinity;
+    if (f > 150){ lo = mid; } else { hi = mid; hit = true; }
+  }
+  const v = hit ? Math.round(hi * 10) / 10 : 0;
+  state.elation.laughPerAct = v;
+  $('#laughPerAct').value = v;
+  schedule();
+});
+
+/* ======================= 渲染 ======================= */
+let timer = null;
+function schedule(){ if (timer) clearTimeout(timer); timer = setTimeout(run, 90); }
+
+function run(){
+  const res = simulate(state);
+  const alt = simulate(Object.assign({}, state, { strategy: state.strategy === 'gate' ? 'full' : 'gate' }));
+  const zero = simulate(Object.assign({}, state, { start: { minoa: 0, huohuo: 0, obilis: 0, yueqing: 0 } }));
+  renderKPI(res);
+  renderTimeline(res);
+  renderEvil(res);
+  renderResources(res);
+  renderDetail(res);
+  renderCompare(res, alt);
+  renderStartCmp(res, zero);
+  const ZERO = { minoa: 0, huohuo: 0, obilis: 0, yueqing: 0 };
+  const ez = simulateElation(elationCfg());
+  const b1 = simulate(Object.assign({}, state, { start: ZERO, enemyCount: 1 }));
+  const b5 = simulate(Object.assign({}, state, { start: ZERO, enemyCount: 5 }));
+  const e1 = simulateElation(elationCfg({ enemyCount: 1 }));
+  const e5 = simulateElation(elationCfg({ enemyCount: 5 }));
+  renderDuel(zero, ez, b1, b5, e1, e5);
+  renderDiag(res, alt, zero);
+}
+
+function renderKPI(res){
+  const b = res.byKey;
+  const cyc = res.cycles;
+  const items = [
+    { k:'队伍总行动', v:res.totals.acts, s:'每轮 ' + fmt(res.totals.acts / cyc, 1) + ' 次', c:'var(--ink-2)' },
+    { k:'弥诺娅 终结技', v:b.minoa.ults, s:'审判技 ' + b.minoa.verdicts + ' 次 / 额外回合 ' + b.minoa.extraTurns + ' 次', c:CHARS.minoa.color },
+    { k:'霍霍·冥焰 终结技', v:b.huohuo.ults, s:'能量 ' + fmt(b.huohuo.energy, 0) + ' / ' + HH_COST, c:CHARS.huohuo.color },
+    { k:'欧比利斯 终结技', v:b.obilis.ults, s:'纸片鳞 ' + fmt(res.resource.scales, 0) + ' / ' + SCALE_COST, c:CHARS.obilis.color },
+    { k:'月青 终结技', v:b.yueqing.ults, s:'能量 ' + fmt(b.yueqing.energy, 0) + ' / ' + YQ_COST, c:CHARS.yueqing.color }
+  ];
+  $('#kpis').innerHTML = items.map(function(x){
+    return '<div class="kpi" style="--kc:' + x.c + '"><div class="k">' + x.k + '</div><div class="v">' + x.v +
+      '</div><div class="s">' + x.s + '</div></div>';
+  }).join('');
+}
+
+/* ---------- 时间轴 ---------- */
+function renderTimeline(res){
+  const T = res.T;
+  const W = 1020, L = 104, R = 26, TOP = 46, PADX = 11;   // PADX：给 0 AV 的大招标记留出位置，避免压到角色名
+  const rows = res.units.length;
+  const rowH = 40;
+  const H = TOP + rows * rowH + 36;
+  const x = function(t){ return L + PADX + (t / T) * (W - L - R - PADX); };
+
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Microsoft YaHei,sans-serif">';
+
+  cycleBands(T).forEach(function(b){
+    const x0 = x(b.start), x1 = x(b.end);
+    s += '<rect x="' + x0 + '" y="' + (TOP - 18) + '" width="' + Math.max(0, x1 - x0) + '" height="' + (rows * rowH + 12) +
+         '" fill="' + (b.idx % 2 === 0 ? '#f6f8fd' : '#ffffff') + '"/>';
+    s += '<text x="' + (x0 + 6) + '" y="' + (TOP - 24) + '" font-size="10.5" fill="#98a0b3">第 ' + b.idx + ' 轮</text>';
+    if (b.idx > 1){
+      s += '<line x1="' + x0 + '" y1="' + (TOP - 18) + '" x2="' + x0 + '" y2="' + (TOP + rows * rowH - 14) +
+           '" stroke="#d9dfec" stroke-width="1" stroke-dasharray="3 4"/>';
+    }
+  });
+
+  // 结界覆盖带
+  const hhRow = 1;
+  const bandY = TOP + hhRow * rowH + rowH / 2 + 6;
+  let segStart = null;
+  res.samples.forEach(function(sp, i){
+    if (sp.shield > 0 && segStart === null) segStart = sp.t;
+    if (sp.shield <= 0 && segStart !== null){
+      s += '<rect x="' + x(segStart) + '" y="' + (bandY - 3) + '" width="' + Math.max(0, x(sp.t) - x(segStart)) +
+           '" height="6" rx="3" fill="#dc2626" opacity="0.18"/>';
+      segStart = null;
+    }
+  });
+  if (segStart !== null){
+    s += '<rect x="' + x(segStart) + '" y="' + (bandY - 3) + '" width="' + Math.max(0, x(T) - x(segStart)) +
+         '" height="6" rx="3" fill="#dc2626" opacity="0.18"/>';
+  }
+
+  s += '<line x1="' + L + '" y1="' + (TOP + rows * rowH - 14) + '" x2="' + (W - R) + '" y2="' + (TOP + rows * rowH - 14) +
+       '" stroke="#cfd6e6" stroke-width="1"/>';
+  const step = T <= 200 ? 25 : (T <= 500 ? 50 : 100);
+  for (let t = 0; t <= T + 1e-9; t += step){
+    const xx = x(t);
+    s += '<line x1="' + xx + '" y1="' + (TOP + rows * rowH - 14) + '" x2="' + xx + '" y2="' + (TOP + rows * rowH - 7) +
+         '" stroke="#b9c1d3" stroke-width="1"/>';
+    s += '<text x="' + xx + '" y="' + (TOP + rows * rowH + 11) + '" font-size="10" fill="#8d95a8" text-anchor="middle">' + t + '</text>';
+  }
+  s += '<text x="' + (W - R) + '" y="' + (TOP + rows * rowH + 26) + '" font-size="10" fill="#8d95a8" text-anchor="end">行动值 AV</text>';
+
+  res.units.forEach(function(u, i){
+    const cy = TOP + i * rowH + rowH / 2 - 6;
+    s += '<line x1="' + L + '" y1="' + cy + '" x2="' + (W - R) + '" y2="' + cy + '" stroke="#eef1f7" stroke-width="1"/>';
+    s += '<text x="' + (L - 12) + '" y="' + (cy + 3) + '" font-size="11.5" fill="#3c4354" text-anchor="end" font-weight="600">' + esc(u.name) + '</text>';
+    s += '<text x="' + (L - 12) + '" y="' + (cy + 16) + '" font-size="9.5" fill="#a3aabb" text-anchor="end">' + fmt(u.spd, 0) + ' 速</text>';
+
+    u.events.forEach(function(ev){
+      const xx = x(ev.t);
+      if (ev.kind === 'turn') return;
+      if (ev.kind === 'ult'){
+        const r = 7.5;
+        s += '<circle cx="' + xx + '" cy="' + cy + '" r="' + (r + 4) + '" fill="' + u.color + '" opacity="0.13"/>';
+        s += '<path d="M ' + xx + ' ' + (cy - r) + ' L ' + (xx + r) + ' ' + cy + ' L ' + xx + ' ' + (cy + r) +
+             ' L ' + (xx - r) + ' ' + cy + ' Z" fill="' + u.color + '" stroke="#fff" stroke-width="1.5"/>';
+      } else if (ev.kind === 'verdict'){
+        const r = 7;
+        s += '<path d="M ' + xx + ' ' + (cy - r - 1) + ' L ' + (xx + r) + ' ' + (cy + r - 1) + ' L ' + (xx - r) + ' ' + (cy + r - 1) +
+             ' Z" fill="#fff" stroke="' + u.color + '" stroke-width="2.2"/>';
+        s += '<path d="M ' + (xx - 2.5) + ' ' + (cy - 8) + ' L ' + xx + ' ' + (cy - 13) + ' L ' + (xx + 2.5) + ' ' + (cy - 8) + '" fill="' + u.color + '"/>';
+      } else if (ev.kind === 'extra'){
+        s += '<circle cx="' + xx + '" cy="' + (cy - 13) + '" r="2.4" fill="' + u.color + '" opacity="0.55"/>';
+      } else if (ev.kind === 'S'){
+        s += '<circle cx="' + xx + '" cy="' + cy + '" r="5.2" fill="' + u.color + '" opacity="0.92"/>';
+      } else {
+        s += '<circle cx="' + xx + '" cy="' + cy + '" r="4.2" fill="#fff" stroke="' + u.color + '" stroke-width="2"/>';
+      }
+    });
+  });
+
+  s += '</svg>';
+  $('#timeline').innerHTML = s;
+  $('#tlLegend').innerHTML =
+    '<span><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4" fill="#fff" stroke="#4f46e5" stroke-width="2"/></svg>普攻</span>' +
+    '<span><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="#4f46e5" opacity=".92"/></svg>战技</span>' +
+    '<span><svg viewBox="0 0 14 14"><path d="M7 1 L13 7 L7 13 L1 7 Z" fill="#4f46e5"/></svg>终结技</span>' +
+    '<span><svg viewBox="0 0 14 14"><path d="M7 2 L13 12 L1 12 Z" fill="#fff" stroke="#4f46e5" stroke-width="2"/></svg>审判技</span>' +
+    '<span><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="2.6" fill="#4f46e5" opacity=".55"/></svg>额外回合触发点</span>' +
+    '<span><i style="background:#dc2626;opacity:.28"></i>结界覆盖</span>';
+}
+
+/* ---------- 通用折线 ---------- */
+function stepPath(pts){
+  if (!pts.length) return '';
+  let d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+  for (let i = 1; i < pts.length; i++){
+    d += ' L' + pts[i][0].toFixed(1) + ' ' + pts[i - 1][1].toFixed(1) + ' L' + pts[i][0].toFixed(1) + ' ' + pts[i][1].toFixed(1);
+  }
+  return d;
+}
+function drawChart(el, opt){
+  const T = opt.T, W = opt.W || 960, H = opt.H || 150;
+  const L = opt.L || 46, R = 18, TOP = 10, BOT = 22;
+  const x = function(t){ return L + (t / T) * (W - L - R); };
+  const y = function(v){ return TOP + (1 - v / opt.yMax) * (H - TOP - BOT); };
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Microsoft YaHei,sans-serif">';
+
+  (opt.ticks || [0, opt.yMax / 2, opt.yMax]).forEach(function(v){
+    s += '<line x1="' + L + '" y1="' + y(v) + '" x2="' + (W - R) + '" y2="' + y(v) + '" stroke="#eef1f7" stroke-width="1"/>';
+    s += '<text x="' + (L - 8) + '" y="' + (y(v) + 3.5) + '" font-size="9.5" fill="#a3aabb" text-anchor="end">' + fmt(v, 0) + '</text>';
+  });
+  (opt.hlines || []).forEach(function(h){
+    s += '<line x1="' + L + '" y1="' + y(h.v) + '" x2="' + (W - R) + '" y2="' + y(h.v) + '" stroke="' + h.color +
+         '" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>';
+    if (h.label) s += '<text x="' + (W - R - 2) + '" y="' + (y(h.v) - 4) + '" font-size="9.5" fill="' + h.color + '" text-anchor="end">' + h.label + '</text>';
+  });
+  cycleBands(T).forEach(function(b){
+    if (b.idx > 1){
+      s += '<line x1="' + x(b.start) + '" y1="' + TOP + '" x2="' + x(b.start) + '" y2="' + (H - BOT) +
+           '" stroke="#e4e8f2" stroke-width="1" stroke-dasharray="3 4"/>';
+    }
+  });
+  opt.lines.forEach(function(ln){
+    const pts = opt.samples.map(function(sp){ return [x(sp.t), y(sp[ln.key])]; });
+    s += '<path d="' + stepPath(pts) + '" fill="none" stroke="' + ln.color + '" stroke-width="2" stroke-linejoin="round" opacity="0.95"/>';
+  });
+  (opt.markers || []).forEach(function(m){
+    s += '<circle cx="' + x(m.t) + '" cy="' + y(m.v) + '" r="2.8" fill="#fff" stroke="' + m.color + '" stroke-width="1.8"/>';
+  });
+  s += '<line x1="' + L + '" y1="' + (H - BOT) + '" x2="' + (W - R) + '" y2="' + (H - BOT) + '" stroke="#cfd6e6" stroke-width="1"/>';
+  s += '<text x="' + L + '" y="' + (H - 6) + '" font-size="9.5" fill="#a3aabb">0</text>';
+  s += '<text x="' + (W - R) + '" y="' + (H - 6) + '" font-size="9.5" fill="#a3aabb" text-anchor="end">' + T + ' AV</text>';
+  s += '</svg>';
+  el.innerHTML = s;
+}
+
+/* ---------- 恶值 ---------- */
+function renderEvil(res){
+  const marks = res.evilEvents.map(function(e){ return { t: e.t, v: 0, color: CHARS.minoa.color }; });
+  drawChart($('#evilChart'), {
+    T: res.T, W: 1000, H: 168, L: 40, yMax: EVIL_CAP,
+    ticks: [0, 2, 4, 6, 8, 10],
+    hlines: [
+      { v: res.xian + 1, label: '审判技解锁 ' + (res.xian + 1), color: '#d97706' },
+      { v: 10, label: '满仓 10', color: '#dc2626' }
+    ],
+    samples: res.samples,
+    lines: [{ key: 'evil', color: CHARS.minoa.color }],
+    markers: marks
+  });
+}
+
+/* ---------- 资源 ---------- */
+function renderResources(res){
+  drawChart($('#cFair'), {
+    T: res.T, W: 460, H: 168, L: 42, yMax: FAIR_CAP,
+    ticks: [0, 85, 170],
+    hlines: [{ v: FAIR_COST, label: '', color: '#d97706' }],
+    samples: res.samples, lines: [{ key: 'fair', color: CHARS.minoa.color }],
+    markers: res.byKey.minoa.ultTimes.map(function(t){ return { t: t, v: FAIR_COST, color: CHARS.minoa.color }; })
+  });
+  drawChart($('#cScales'), {
+    T: res.T, W: 460, H: 168, L: 42, yMax: SCALE_COST,
+    ticks: [0, SCALE_COST / 2, SCALE_COST],
+    hlines: [{ v: SCALE_COST, label: '', color: '#d97706' }],
+    samples: res.samples, lines: [{ key: 'scales', color: CHARS.obilis.color }],
+    markers: res.byKey.obilis.ultTimes.map(function(t){ return { t: t, v: SCALE_COST, color: CHARS.obilis.color }; })
+  });
+  drawChart($('#cEnergy'), {
+    T: res.T, W: 460, H: 168, L: 42, yMax: YQ_COST,
+    ticks: [0, 95, 190],
+    hlines: [{ v: HH_COST, label: '170', color: CHARS.huohuo.color },
+             { v: YQ_COST, label: '190', color: CHARS.yueqing.color }],
+    samples: res.samples,
+    lines: [{ key: 'hh', color: CHARS.huohuo.color }, { key: 'yq', color: CHARS.yueqing.color }],
+    markers: res.byKey.huohuo.ultTimes.map(function(t){ return { t: t, v: HH_COST, color: CHARS.huohuo.color }; })
+      .concat(res.byKey.yueqing.ultTimes.map(function(t){ return { t: t, v: YQ_COST, color: CHARS.yueqing.color }; }))
+  });
+  $('#resLegend').innerHTML =
+    '<span><i style="background:' + CHARS.minoa.color + '"></i>公平值（弥诺娅）</span>' +
+    '<span><i style="background:' + CHARS.obilis.color + '"></i>纸片鳞（欧比利斯）</span>' +
+    '<span><i style="background:' + CHARS.huohuo.color + '"></i>霍霍能量</span>' +
+    '<span><i style="background:' + CHARS.yueqing.color + '"></i>月青能量</span>' +
+    '<span style="color:#a3aabb">空心圆 = 该资源触顶并结算大招</span>';
+}
+
+/* ---------- 明细 ---------- */
+function renderDetail(res){
+  const rows = res.units.map(function(u){
+    let produce = '—';
+    if (u.key === 'minoa') produce = '公平值 +' + fmt(res.resource.fairGain, 0);
+    else if (u.key === 'obilis') produce = '纸片鳞 ' + (res.resource.scaleBy.scholar + res.resource.scaleBy.heal +
+      res.resource.scaleBy.verdict + res.resource.scaleBy.evil);
+    else produce = '能量 ' + fmt(u.energy, 0) + ' / ' + u.cost;
+
+    let interval = '—';
+    if (u.ultTimes.length >= 2){
+      let sum = 0;
+      for (let i = 1; i < u.ultTimes.length; i++) sum += u.ultTimes[i] - u.ultTimes[i - 1];
+      interval = fmt(sum / (u.ultTimes.length - 1), 0) + ' AV';
+    } else if (u.ultTimes.length === 1){
+      interval = '首大 ' + fmt(u.ultTimes[0], 0) + ' AV';
+    }
+
+    let cls = 'no', txt = '未开大';
+    if (u.ults >= 1){
+      const perCycle = u.ults / res.cycles;
+      cls = perCycle >= 1 ? 'ok' : 'mid';
+      txt = perCycle >= 1 ? '每轮 ≥1 大'
+          : fmt(res.cycles / u.ults, 1).replace(/\.0$/, '') + ' 轮 1 大';
+    } else {
+      let cur = 0, need = 1;
+      if (u.key === 'minoa'){ cur = res.resource.fair; need = FAIR_COST; }
+      else if (u.key === 'obilis'){ cur = res.resource.scales; need = SCALE_COST; }
+      else { cur = u.energy; need = u.cost; }
+      const pct = need ? cur / need : 0;
+      if (pct >= 0.8){ cls = 'mid'; txt = '差 ' + fmt(need - cur, 0) + ' 点'; }
+    }
+
+    return '<tr>' +
+      '<td class="name"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + u.color +
+        ';margin-right:7px;vertical-align:1px"></span>' + esc(u.name) + '</td>' +
+      '<td>' + fmt(u.spd, 0) + '</td>' +
+      '<td' + (u.start > 0 ? ' style="color:var(--accent);font-weight:600"' : ' style="color:#b3b9c8"') + '>' +
+        fmt(u.start, 0) + '</td>' +
+      '<td><b>' + u.acts + '</b></td>' +
+      '<td>' + u.basics + '</td>' +
+      '<td>' + u.skills + '</td>' +
+      '<td>' + u.extraTurns + '</td>' +
+      '<td><b>' + u.ults + '</b></td>' +
+      '<td>' + (u.verdicts || 0) + '</td>' +
+      '<td>' + produce + '</td>' +
+      '<td>' + interval + '</td>' +
+      '<td><span class="pill ' + cls + '">' + txt + '</span></td>' +
+    '</tr>';
+  }).join('');
+  $('#detail tbody').innerHTML = rows;
+}
+
+/* ---------- 策略对比 ---------- */
+function renderCompare(cur, alt){
+  const rows = [
+    ['弥诺娅 行动次数', cur.byKey.minoa.acts, alt.byKey.minoa.acts],
+    ['弥诺娅 审判技次数', cur.byKey.minoa.verdicts, alt.byKey.minoa.verdicts],
+    ['弥诺娅 终结技次数', cur.byKey.minoa.ults, alt.byKey.minoa.ults],
+    ['公平值累计获取', fmt(cur.resource.fairGain, 0), fmt(alt.resource.fairGain, 0)],
+    ['公平值溢出浪费', fmt(cur.resource.fairWaste, 0), fmt(alt.resource.fairWaste, 0)],
+    ['每次审判平均转化', cur.byKey.minoa.verdicts ? fmt(cur.resource.fairGain / cur.byKey.minoa.verdicts, 1) : '—',
+                       alt.byKey.minoa.verdicts ? fmt(alt.resource.fairGain / alt.byKey.minoa.verdicts, 1) : '—'],
+    ['队伍总行动次数', cur.totals.acts, alt.totals.acts]
+  ];
+  const ultRow = 2;
+  const diff = cur.byKey.minoa.ults !== alt.byKey.minoa.ults;
+  let html = '<table class="cmp"><thead><tr><th>指标</th><th>当前（' +
+    (cur.strategy === 'gate' ? '门槛审判' : '满仓审判') + '）</th><th>另一种（' +
+    (alt.strategy === 'gate' ? '门槛审判' : '满仓审判') + '）</th></tr></thead><tbody>';
+  rows.forEach(function(r, i){
+    const isUlt = i === ultRow;
+    const mark = isUlt && diff ? ' style="font-weight:700;background:#f5f4ff"' : '';
+    html += '<tr><td>' + r[0] + '</td><td' + mark + '>' + r[1] + '</td><td' + mark + '>' + r[2] + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  html += '<p class="hint">灰色带仅在两列终结技次数不同时标出。' +
+    (diff ? '' : '本次两种策略的终结技次数一致——说明当前面板下瓶颈不在审判节奏，而在公平值的单次转化量。') + '</p>';
+  $('#cmpBox').innerHTML = html;
+}
+
+/* ---------- 起手资源对照 ---------- */
+function renderStartCmp(res, zero){
+  const box = $('#startCmpBox');
+  const any = ORDER.some(function(k){ return (res.start[k] || 0) > 0; });
+  if (!any || !zero){
+    box.innerHTML = '<p class="hint" style="margin:0;padding:4px 0">当前全员起手为 0，没有可对照的差异。' +
+      '在左侧「进战初始资源」填入数值（或点「够一次大招」「全满仓」），这里会逐项列出它与 0 起手的结果差。</p>';
+    return;
+  }
+  const pair = function(b, a, changed){
+    return '<span class="same">' + b + '</span><span class="arw">→</span>' +
+      '<span class="' + (changed ? 'now' : 'same') + '">' + a + '</span>';
+  };
+  let html = '<table class="tb5"><thead><tr>' +
+    '<th>角色</th><th>起手资源</th><th>终结技次数</th><th>首次大招 AV</th><th>行动次数</th>' +
+    '</tr></thead><tbody>';
+  ORDER.forEach(function(k){
+    const a = res.byKey[k], b = zero.byKey[k];
+    const fA = a.ultTimes.length ? fmt(a.ultTimes[0], 0) : '—';
+    const fB = b.ultTimes.length ? fmt(b.ultTimes[0], 0) : '—';
+    html += '<tr>' +
+      '<td class="role">' + CHARS[k].name + '<small>' + START_META[k].res + '</small></td>' +
+      '<td>' + fmt(res.start[k] || 0, 0) + '</td>' +
+      '<td>' + pair(b.ults, a.ults, a.ults !== b.ults) + '</td>' +
+      '<td>' + pair(fB, fA, fA !== fB) + '</td>' +
+      '<td>' + pair(b.acts, a.acts, a.acts !== b.acts) + '</td>' +
+      '</tr>';
+  });
+  html += '</tbody></table>';
+  const dUlt = res.totals.ults - zero.totals.ults;
+  const dAct = res.totals.acts - zero.totals.acts;
+  html += '<p class="hint">全队终结技 <b>' + zero.totals.ults + ' → ' + res.totals.ults + '</b>（' +
+    (dUlt === 0 ? '持平' : (dUlt > 0 ? '+' : '') + dUlt) + '）；队伍总行动 <b>' + zero.totals.acts + ' → ' +
+    res.totals.acts + '</b>（' + (dAct === 0 ? '持平——起手不占行动值' : (dAct > 0 ? '+' : '') + dAct) + '）。' +
+    (dUlt > 0 ? '多出来的这部分大招完全由初始资源兑现，相当于白送的窗口。'
+              : '起手只把首大提前，没有增加总量，属「提前兑现」。') + '</p>';
+  box.innerHTML = html;
+}
+
+/* ---------- 诊断 ---------- */
+function renderDiag(res, alt, zero){
+  const it = [];
+  const cyc = res.cycles, T = res.T, m = res.byKey.minoa, r = res.resource;
+
+  // 0 起手资源兑现情况（与全员 0 起手对照）
+  const st = res.start || {};
+  const touched = ORDER.filter(function(k){ return (st[k] || 0) > 0; });
+  if (touched.length && zero){
+    const seg = touched.map(function(k){
+      const a = res.byKey[k], b = zero.byKey[k];
+      const dU = a.ults - b.ults;
+      const fA = a.ultTimes.length ? a.ultTimes[0] : null;
+      const fB = b.ultTimes.length ? b.ultTimes[0] : null;
+      let td;
+      if (dU > 0) td = '多 <b>' + dU + '</b> 次大招' + (fA !== null && fA < 1e-9 ? '，首大在 0 AV' : '');
+      else if (dU < 0) td = '反而少 <b>' + (-dU) + '</b> 次大招（资源节奏被打乱）';
+      else if (fA !== null && fA < 1e-9) td = '在 0 AV 开出首大，但总次数与 0 起手相同';
+      else if (fA !== null && fB !== null && fA < fB - 0.5) td = '总次数不变，首大提前 <b>' + fmt(fB - fA, 0) + '</b> AV';
+      else td = '对本次推演的大招次数与时点<b>都没有影响</b>';
+      return CHARS[k].name + '（起手 ' + fmt(st[k], 0) + '）' + td;
+    });
+    const dUlt = res.totals.ults - zero.totals.ults;
+    it.push({ tag:'blue', label:'起手',
+      text:'与全员 0 起手对照——' + seg.join('；') + '。' + (dUlt > 0
+        ? '全队因此多出 <b>' + dUlt + '</b> 次大招，这部分完全由初始资源兑现，不占用任何行动值。'
+        : '初始资源没有改变全队大招总量，只改变了到达第一次大招的时间：属于「提前兑现」，不是「额外收益」。')
+    });
+  }
+
+  // 1 弥诺娅核心循环
+  const avgGain = m.verdicts ? r.fairGain / m.verdicts : 0;
+  if (m.ults === 0){
+    it.push({ tag:'red', label:'公平值',
+      text:'<b>弥诺娅在 ' + T + ' AV 内一次终结技都没开出。</b>当前策略下她审判 <b>' + m.verdicts + '</b> 次，累计换到 <b>' +
+        fmt(r.fairGain, 0) + '</b> 公平值，当前存量 <b>' + fmt(r.fair, 0) + '</b>，距 ' + FAIR_COST + ' 门槛还差 <b>' +
+        fmt(Math.max(0, FAIR_COST - r.fair), 0) + '</b>；按每次审判平均 ' + fmt(avgGain, 1) +
+        ' 点计算，还需要 <b>' + fmt((FAIR_COST - r.fair) / Math.max(1, avgGain), 1) + '</b> 次审判才能开出第一次。'
+    });
+  } else {
+    it.push({ tag:'green', label:'公平值',
+      text:'弥诺娅开出 <b>' + m.ults + '</b> 次终结技，审判 <b>' + m.verdicts + '</b> 次，累计转化 <b>' +
+        fmt(r.fairGain, 0) + '</b> 点公平值——每次审判平均 ' + fmt(avgGain, 1) + '，相当于一次大招的 <b>' +
+        fmt(avgGain / FAIR_COST * 100, 0) + '%</b>。' +
+        (r.fairWaste > 0 ? '另有 <b>' + fmt(r.fairWaste, 0) + '</b> 点因触及 170 上限被吞掉。' : '')
+    });
+  }
+
+  // 2 门槛 vs 满仓 的效率差
+  const m2 = alt.byKey.minoa;
+  const avgGainAlt = m2.verdicts ? alt.resource.fairGain / m2.verdicts : 0;
+  if (m.verdicts > 0 && m2.verdicts > 0 && Math.abs(avgGain - avgGainAlt) > 1){
+    const hi = Math.max(avgGain, avgGainAlt), lo = Math.min(avgGain, avgGainAlt);
+    const ratio = hi / lo;
+    it.push({ tag:'amber', label:'规则缺口',
+      text:'两种审判策略的单次收益差 <b>' + fmt(ratio, 1) + ' 倍</b>：门槛审判平均每次转化 <b>' + fmt(avgGain, 1) +
+        '</b>，满仓审判 <b>' + fmt(avgGainAlt, 1) + '</b>。根因是 <code>公平值 =(恶−善)×系数</code> 对恶值<b>线性</b>，' +
+        '而恶值的可用区间只有 5 个刻度（善值固定 5、上限 10）；更要紧的是战技单次就跳 3～4 点恶，' +
+        '审判常常落在 8 附近而不是门槛 6，从进门那一刻就已经吃不到低段位。' +
+        (ratio >= 1.8
+          ? '结果是「解锁即审判」被自己的公式算成了劣解——那 1 个额外回合的正反馈，玩家很快会学会不要它。'
+          : '差值目前还不算悬殊，但方向是确定的：门槛策略的全部价值都压在「多出的那 1 个额外回合」上，而不是公平值本身。一旦数值再往上推，额外回合就会变成为唯一理由。')
+    });
+  }
+
+  // 3 恶值速率
+  it.push({ tag:'blue', label:'恶值',
+      text:'战技单次为每个目标 +3 恶（结界中 +4）。单目标靶下，从 0 到解锁 ' + (res.xian + 1) + ' 需 <b>' +
+        Math.ceil((res.xian + 1) / 3) + ' 次战技</b>，到满仓 10 需 <b>' + Math.ceil(EVIL_CAP / 3) + ' 次战技</b>；' +
+        '本次共回收 <b>' + fmt(r.evilRecovered, 0) + '</b> 单位恶值。目标数提升会同时放大恶值供给与审判技的回收量，' +
+        '所以这套体系对<b>群怪环境更友好</b>，单体靶是它最不利的场景。'
+  });
+
+  // 4 纸片鳞
+  const sb = r.scaleBy;
+  const totalScales = sb.scholar + sb.heal + sb.verdict + sb.evil;
+  it.push({ tag: res.byKey.obilis.ults > 0 ? 'green' : 'amber', label:'纸片鳞',
+    text:'共获取 <b>' + totalScales + '</b> 点纸片鳞，来源分布：折学家 ' + sb.scholar + ' / 受治疗 ' + sb.heal +
+      ' / 队友审判技 ' + sb.verdict + ' / 队友加恶 ' + sb.evil + '。' +
+      (sb.scholar > totalScales * 0.5
+        ? '其中折学家占比过半——它每回合都给，且不在「各触发一次」的限制内，实际成了主供水管；' +
+          '而文档把它写成战技的附带效果，容易被误读为小额回能。'
+        : '四项来源分布相对均衡，' + SCALE_COST + ' 点的门槛与「各自触发一次」的节流设计基本对齐。') +
+      (r.scaleWaste > 0 ? '另有 <b>' + fmt(r.scaleWaste, 0) + '</b> 点溢出浪费。' : '')
+  });
+
+  // 5 结界覆盖
+  it.push({ tag: r.shieldRate > 0.6 ? 'green' : 'amber', label:'结界',
+    text:'【碰次瓦】结界覆盖 <b>' + fmt(r.shieldRate * 100, 0) + '%</b> 的战斗时长。' +
+      (r.shieldRate > 0.6
+        ? '结界期间我方每次攻击都触发追攻并回 1 战技点，因此战技点在这段时间里是<b>净流入</b>'
+        : '覆盖率偏低，追攻与「额外 +1 恶」的收益窗口不连续')
+  });
+  if (r.spWaste > 0){
+    it.push({ tag:'amber', label:'战技点',
+      text:'战技点溢出浪费 <b>' + fmt(r.spWaste, 0) + '</b> 点' +
+        (r.spShort > 0 ? '，另有 <b>' + r.spShort + '</b> 次战技因点数不足被降级为普攻' : '，且全程没有出现点数不足') +
+        '。追攻回点使队伍产点能力远超消耗，战技点从「需要管理的资源」退化成「恒满的状态」——' +
+        '若希望保留取舍，建议给追攻回点加「每回合一次」或「每次结界限一次」的上限。'
+    });
+  } else if (r.spShort > 0){
+    it.push({ tag:'red', label:'战技点',
+      text:'有 <b>' + r.spShort + '</b> 次战技因战技点不足被降级为普攻，实际战技频率低于设定模式，恶值与资源产出都会跟着打折。'
+    });
+  }
+
+  // 6 行动分布
+  const sorted = res.units.slice().sort(function(a, b){ return b.acts - a.acts; });
+  if (sorted[0].acts - sorted[sorted.length - 1].acts >= 3){
+    it.push({ tag:'blue', label:'时序',
+      text:'行动次数从 <b>' + sorted[0].name + ' ' + sorted[0].acts + ' 次</b> 到 <b>' + sorted[sorted.length - 1].name +
+        ' ' + sorted[sorted.length - 1].acts + ' 次</b>，最大差 ' + (sorted[0].acts - sorted[sorted.length - 1].acts) +
+        ' 次。欧比利斯的 16% 拉条全部指向弥诺娅，进一步放大了这个差距——弥诺娅多出来的行动次数，本质是队友的行动位换来的。'
+    });
+  }
+
+  $('#diag').innerHTML = it.map(function(x){
+    return '<div class="item"><span class="tag ' + x.tag + '">' + x.label + '</span><span>' + x.text + '</span></div>';
+  }).join('');
+}
+
+/* ======================= 双队对照 ======================= */
+function elationCfg(extra){
+  const e = state.elation;
+  const cfg = {
+    av: state.av,
+    enemyCount: state.enemyCount,
+    spd: { wolf: e.spd.wolf, yaoguang: e.spd.yaoguang, zhenzhu: e.spd.zhenzhu },
+    laughPerAct: e.laughPerAct,
+    blindLaugh: e.blindLaugh,
+    start: { laugh: 0, hid: 0 }
+  };
+  return Object.assign(cfg, extra || {});
+}
+
+function renderElationSpd(){
+  const box = $('#elationSpd');
+  if (!box) return;
+  box.innerHTML = EORDER.map(function(k){
+    return '<div><label class="f" style="margin-top:0">' + ECHARS[k].name + '</label>' +
+      '<input type="number" data-ek="' + k + '" value="' + state.elation.spd[k] + '" min="1" max="400"></div>';
+  }).join('');
+}
+
+function firstUlt(u){ return u.ults && u.ultTimes.length ? u.ultTimes[0] : null; }
+function avgGap(u){
+  if (u.ultTimes.length < 2) return null;
+  return (u.ultTimes[u.ultTimes.length - 1] - u.ultTimes[0]) / (u.ultTimes.length - 1);
+}
+function avStr(v){ return v === null ? '—' : fmt(v, 0) + ' AV'; }
+
+function renderDuel(balZero, elaZero, bal1, bal5, ela1, ela5){
+  const box = $('#duelBox');
+  if (!box) return;
+  if (!state.elation.on){
+    box.innerHTML = '<p class="sub" style="margin:0">已关闭欢愉队对照（左侧「欢愉队对照参数」可重新启用）</p>';
+    return;
+  }
+  const cyc = balZero.cycles;
+  const bm = balZero.byKey.minoa, ew = elaZero.byKey.wolf;
+  const balUlts = balZero.totals.ults, elaUlts = elaZero.totals.ults;
+  const balFirst = firstUlt(bm), elaFirst = firstUlt(ew);
+  const balGap = avgGap(bm), elaGap = avgGap(ew);
+  const gapEl = $('#ahaGapTxt');
+  if (gapEl) gapEl.textContent = fmt(elaZero.ahaGap, 1);
+
+  const rows = [
+    ['队伍总行动次数（均衡 4 人 / 欢愉 3 人，另计阿哈时刻 ' + elaZero.ahaCount + ' 次）', balZero.totals.acts, elaZero.totals.acts],
+    ['首个终结技（主 C）', avStr(balFirst), avStr(elaFirst)],
+    ['终结技总数', balUlts, elaUlts],
+    ['主 C 大招间隔', balGap === null ? '—' : fmt(balGap, 0) + ' AV', elaGap === null ? '—' : fmt(elaGap, 0) + ' AV'],
+    ['每轮终结技', fmt(balUlts / cyc, 2), fmt(elaUlts / cyc, 2)],
+    ['资源闲置', '公平值溢出 ' + fmt(balZero.resource.fairWaste, 0) + ' / 纸片鳞溢出 ' + fmt(balZero.resource.scaleWaste, 0) +
+      ' / 战技点 ' + fmt(balZero.resource.spWaste, 0),
+      '笑点浪费 ' + fmt(elaZero.resource.laughLost, 0) + ' / 隐藏分清零 ' + fmt(elaZero.resource.hidLost, 0) +
+      ' / 战技点 ' + fmt(elaZero.resource.spWaste, 0)],
+    ['敌方 1→5 的大招变化', (bal5.totals.ults - bal1.totals.ults >= 0 ? '+' : '') + (bal5.totals.ults - bal1.totals.ults) +
+      '（' + bal1.totals.ults + ' → ' + bal5.totals.ults + '）',
+      (ela5.totals.ults - ela1.totals.ults >= 0 ? '+' : '') + (ela5.totals.ults - ela1.totals.ults) +
+      '（' + ela1.totals.ults + ' → ' + ela5.totals.ults + '）']
+  ];
+
+  let html = '<table class="cmp"><thead><tr><th>指标（同 ' + balZero.T + ' AV / ' + balZero.enemyCount + ' 个敌方）</th>' +
+    '<th>均衡队 · 弥诺娅</th><th>欢愉队 · 银狼LV.999</th></tr></thead><tbody>';
+  rows.forEach(function(r, i){
+    html += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>';
+  });
+  html += '</tbody></table>';
+
+  // --- 优缺点：由上面的实测差值 + 规则结构生成 ---
+  const needEvil = balZero.xian + 1;
+  const skillToUnlock = Math.ceil(needEvil / 3);
+  const balPros = [], balCons = [], elaPros = [], elaCons = [];
+  const dUlt = bal5.totals.ults - bal1.totals.ults;
+
+  // 均衡
+  if (dUlt > 0){
+    balPros.push(['对群放大', '敌方 1→5 时终结技 <b>' + bal1.totals.ults + ' → ' + bal5.totals.ults + '</b>（+' + dUlt + '）。恶值按目标逐个累加，怪物越多资源越足——这是纯正向的环境适配']);
+  } else {
+    balCons.push(['对群不放大', '敌方 1→5 时终结技仍是 <b>' + bal1.totals.ults + '</b> 次。单目标靶下的资源速率就是这套体系的下限']);
+  }
+  balPros.push(['双资源并行', '公平值（门槛 130）与本场产出的纸片鳞（门槛 ' + SCALE_COST + '）是两条独立链条，任一条推得动都有大招产出：本场分别 ' + balUlts + ' 次大招中弥诺娅 ' + bm.ults + ' 次、欧比利斯 ' + balZero.byKey.obilis.ults + ' 次']);
+  if ((state.start.minoa || 0) + (state.start.obilis || 0) + (state.start.huohuo || 0) + (state.start.yueqing || 0) > 0){
+    balPros.push(['起手可兑现', '进战资源在 0 AV 立即结算，等于用配装换开局节奏；欢愉队这一侧没有等价手段']);
+  }
+  balCons.push(['门槛要"恶−善≥1"', '善值被欧比利斯压到 ' + balZero.xian + '，仍需恶值 ≥ <b>' + needEvil + '</b>；单目标下战技每次只 +3，要 <b>' + skillToUnlock + ' 次战技</b>才解锁审判技']);
+  balCons.push(['审判清空全体恶值', '每次审判都把恶值归零重启，恶值<b>不能跨审判累积</b>；开场那几回合的峰值无法带到下一轮']);
+  if (balZero.resource.fairWaste > 0){
+    balCons.push(['公平值撞顶', '本场有 <b>' + fmt(balZero.resource.fairWaste, 0) + '</b> 点公平值因 170 上限被浪费，说明审判节奏快过消耗节奏']);
+  }
+  if (balZero.resource.spWaste > 0){
+    balCons.push(['战技点溢出', '结界追攻回点让战技点<b>浪费 ' + fmt(balZero.resource.spWaste, 0) + ' 点</b>，从"要管理的资源"退化为"恒满"']);
+  }
+  balCons.push(['节奏掌握在敌方手里', '恶值来自"我方加恶 + 敌方攻击 +1"，站桩靶不出手，等于少了一条供给；换成会动手的怪才吃满']);
+
+  // 欢愉
+  const dEla = ela5.totals.ults - ela1.totals.ults;
+  if (dEla === 0){
+    elaPros.push(['不挑敌方数量', '敌方 1→5 时大招数<b>完全不变</b>（' + ela1.totals.ults + ' → ' + ela5.totals.ults + '）。笑点来自队友行动，敌方只是伤害受体']);
+  } else {
+    elaPros.push(['对群略强', '敌方 1→5 时大招 <b>' + ela1.totals.ults + ' → ' + ela5.totals.ults + '</b>']);
+  }
+  elaPros.push(['单门槛', '只需要一条曲线：笑点 → 隐藏分 ≥ ' + WOLF_ULT_COST + ' 即可开大，不存在"两套资源互相等"的问题']);
+  elaPros.push(['主 C 不抢战技点', '结界内强化普攻不消耗战技点，本场战技点浪费 ' + fmt(elaZero.resource.spWaste, 0) + ' 点（均衡队 ' + fmt(balZero.resource.spWaste, 0) + ' 点）']);
+  elaCons.push(['退出结界即清零', '本场隐藏分被清零损失 <b>' + fmt(elaZero.resource.hidLost, 0) + '</b> 点，' +
+    '意味着资源<b>无法跨窗口累积</b>：攒到 60 才能开一次，开完必然重新从 0 起跑']);
+  elaCons.push(['节奏由阿哈时刻决定', '笑点只在阿哈时刻结算（当前约 <b>' + fmt(elaZero.ahaGap, 0) + ' AV</b> 一次，本场 ' + elaZero.ahaCount + ' 次）。' +
+    '这个周期由队伍速度按公式算出，玩家无法用操作改变']);
+  if (elaZero.resource.laughLost > 0){
+    elaCons.push(['笑点会溢出', '本场有 <b>' + fmt(elaZero.resource.laughLost, 0) + '</b> 点笑点在结算时因隐藏分存储不足被丢弃']);
+  }
+  elaCons.push(['链式依赖', '笑点全靠队友产出：本场 ' + fmt(elaZero.resource.laughGain, 0) + ' 点全部来自 2 名队友的行动与耗点。' +
+    '少一个人或换掉产笑点角色，整条链直接降速']);
+
+  function col(title, color, pros, cons){
+    return '<div class="dcol"><h3 style="color:' + color + '">' + title + '</h3>' +
+      '<p class="dsub">优点</p>' + pros.map(function(x){
+        return '<div class="item ok"><span class="tag ok">' + x[0] + '</span><div>' + x[1] + '</div></div>';
+      }).join('') +
+      '<p class="dsub">缺点</p>' + cons.map(function(x){
+        return '<div class="item bad"><span class="tag bad">' + x[0] + '</span><div>' + x[1] + '</div></div>';
+      }).join('') + '</div>';
+  }
+
+  html += '<div class="duel2">' + col('均衡队（弥诺娅）', CHARS.minoa.color, balPros, balCons) +
+    col('欢愉队（银狼LV.999）', ECHARS.wolf.color, elaPros, elaCons) + '</div>';
+
+  // 一句话结论
+  let concl;
+  const mainPair = '<b>主 C 大招 ' + bm.ults + ' : ' + ew.ults + '</b>';
+  if (balFirst === null && elaFirst === null){
+    concl = '这段时间两边都没开出主 C 大招：' + balZero.T + ' AV 对两套体系都太短。';
+  } else if (elaFirst === null){
+    concl = '同样情况下欢愉队<b>一次都开不出来</b>，而均衡队已进 ' + fmt(balFirst, 0) + ' AV 首大。';
+  } else if (balFirst === null){
+    concl = '同样情况下均衡队<b>一次都开不出来</b>，欢愉队 ' + fmt(elaFirst, 0) + ' AV 首大。';
+  } else {
+    const diff = Math.abs(elaFirst - balFirst);
+    let gapTxt;
+    if (diff < 6) gapTxt = '两边首大几乎同时（' + fmt(balFirst, 0) + ' vs ' + fmt(elaFirst, 0) + ' AV）';
+    else if (elaFirst < balFirst) gapTxt = '欢愉队首大更快（' + fmt(elaFirst, 0) + ' vs ' + fmt(balFirst, 0) + ' AV）';
+    else gapTxt = '均衡队首大更快（' + fmt(balFirst, 0) + ' vs ' + fmt(elaFirst, 0) + ' AV）';
+    concl = gapTxt + '；' + mainPair + '（全队 ' + balUlts + ' : ' + elaUlts + '）。' +
+      '首大快慢看的是启动成本，总量看的是资源供给能否持续——这两个指标经常指向不同结论，' +
+      '所以"谁更强"必须先说时长。';
+  }
+  html += '<p class="dconcl">' + concl + '</p>';
+
+  box.innerHTML = html;
+}
+
+/* ======================= 启动 ======================= */
+renderStart();
+renderUnits();
+renderElationSpd();
+syncAV(state.av);
+run();
+</script>
+</body>
+</html>
